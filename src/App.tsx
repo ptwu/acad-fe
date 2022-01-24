@@ -28,8 +28,8 @@ export default function App() {
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
-              <Route path="teams" element={<About />}>
-                <Route path=":teamId" element={<Users />} />
+              <Route path="u" element={<NotFound />}>
+                <Route path=":id" element={<NotFound />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Route>
@@ -39,14 +39,6 @@ export default function App() {
       <Footer />
     </ThemeProvider>
   );
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
 
 function NotFound() {

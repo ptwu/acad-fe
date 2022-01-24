@@ -4,6 +4,7 @@ import {
   Button,
   Box,
   CircularProgress,
+  Grow,
 } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import styles from './index.module.css';
@@ -39,7 +40,11 @@ export default function Home(): ReactElement {
           </Box>
         </>
       )}
-      {isLinkOpen && link !== '' && <h3>{link}</h3>}
+      {isLinkOpen && link !== '' && (
+        <Grow in={true}>
+          <h3>{link}</h3>
+        </Grow>
+      )}
       {isLinkOpen && link === '' && (
         <Box textAlign="center">
           <CircularProgress className={styles.Loading} />
