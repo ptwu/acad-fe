@@ -23,19 +23,17 @@ export default function App() {
       <Typography variant="h4" className={styles.Logo}>
         a <strong className={styles.CyHeader}>成语</strong> a day
       </Typography>
-      <div className={styles.BodyContainer}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/">
-              <Route index element={<Home />} />
-              <Route path="u" element={<NotFound />}>
-                <Route path=":id" element={<NotFound />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="u" element={<NotFound />}>
+              <Route path=":id" element={<NotFound />} />
             </Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
       <Footer />
     </ThemeProvider>
   );

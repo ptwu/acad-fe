@@ -1,0 +1,6 @@
+.MuiOutlinedInput-input:hover {
+  cursor: pointer;
+}
+.MuiOutlinedInput-input:focus {
+  cursor: auto;
+}

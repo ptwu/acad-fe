@@ -12,3 +12,12 @@
 .Loading {
   margin-top: 64px;
 }
+
+.Subtitle {
+  color: rgb(85, 85, 85);
+  margin-top: 24px !important;
+}
+
+.Url {
+  margin-top: 64px !important;
+}

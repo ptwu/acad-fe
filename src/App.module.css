@@ -1,7 +1,3 @@
-.BodyContainer {
-  min-height: calc(100vh - 85px - 54px - 114px) !important;
-}
-
 .CyHeader {
   background: -webkit-linear-gradient(rgb(255, 108, 72), rgb(255, 110, 231));
   -webkit-background-clip: text;
