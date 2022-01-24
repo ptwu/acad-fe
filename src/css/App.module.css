@@ -1,0 +1,16 @@
+.CyHeader {
+  background: -webkit-linear-gradient(rgb(255, 75, 75), rgb(255, 110, 231));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0.3em 0 0.3em;
+}
+
+.Logo {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 5px solid black;
+}

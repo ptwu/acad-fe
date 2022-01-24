@@ -1,0 +1,14 @@
+.Section {
+  min-height: calc(100vh - 75px);
+}
+
+.CTAButton {
+  margin-top: 16px !important;
+  text-transform: none !important;
+}
+
+.CTAText {
+  font-weight: 300;
+  margin-top: 64px !important;
+  text-align: center;
+}

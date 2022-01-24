@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Typography } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styles from './css/App.module.css';
+import Home from './components/Home/';
 
-function App() {
+export default function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#0052cc',
+      },
+    },
+    typography: {
+      allVariants: {
+        fontFamily: 'Hind Madurai',
+      },
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Typography variant="h4" className={styles.Logo}>
+        a <strong className={styles.CyHeader}>成语</strong> a day
+      </Typography>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="teams" element={<About />}>
+              <Route path=":teamId" element={<Users />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      <footer>Like the app?</footer>
+    </ThemeProvider>
   );
 }
 
-export default App;
+function About() {
+  return <h2>About</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
+}
+
+function NotFound() {
+  return <h2>404</h2>;
+}
