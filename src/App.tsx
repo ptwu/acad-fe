@@ -1,7 +1,8 @@
 import { Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import styles from './css/App.module.css';
+import styles from './App.module.css';
+import Footer from './components/Footer';
 import Home from './components/Home/';
 
 export default function App() {
@@ -22,18 +23,20 @@ export default function App() {
       <Typography variant="h4" className={styles.Logo}>
         a <strong className={styles.CyHeader}>成语</strong> a day
       </Typography>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="teams" element={<About />}>
-              <Route path=":teamId" element={<Users />} />
+      <div className={styles.BodyContainer}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="teams" element={<About />}>
+                <Route path=":teamId" element={<Users />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      <footer>Like the app?</footer>
+          </Routes>
+        </BrowserRouter>
+      </div>
+      <Footer />
     </ThemeProvider>
   );
 }
