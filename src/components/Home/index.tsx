@@ -16,7 +16,7 @@ export default function Home(): ReactElement {
   const handleLinkGeneration = async () => {
     setIsLinkOpen(true);
     // await calls here
-    setLink('https://www.youtube.com/watch?v=q6EoRBvdVPQ');
+    setLink('https://www.youtube.com/watch?v=J_CFBjAyPWE');
   };
 
   return (

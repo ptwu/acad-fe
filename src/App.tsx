@@ -1,9 +1,10 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styles from './App.module.css';
 import Footer from './components/Footer';
 import Home from './components/Home/';
+import LearningPage from './components/LearningPage';
 
 export default function App() {
   const theme = createTheme({
@@ -27,8 +28,8 @@ export default function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Home />} />
-            <Route path="u" element={<NotFound />}>
-              <Route path=":id" element={<NotFound />} />
+            <Route path="u" element={<LearningPage />}>
+              <Route path=":id" element={<LearningPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Route>
