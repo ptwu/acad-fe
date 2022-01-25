@@ -21,20 +21,22 @@ export default function App() {
   });
   return (
     <ThemeProvider theme={theme}>
-      <Typography variant="h4" className={styles.Logo}>
-        a <strong className={styles.CyHeader}>成语</strong> a day
-      </Typography>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="u" element={<LearningPage />}>
-              <Route path=":id" element={<LearningPage />} />
+      <div className={styles.MainContainer}>
+        <Typography variant="h4" className={styles.Logo}>
+          a <strong className={styles.CyHeader}>成语</strong> a day
+        </Typography>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="u" element={<LearningPage />}>
+                <Route path=":id" element={<LearningPage />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </div>
       <Footer />
     </ThemeProvider>
   );

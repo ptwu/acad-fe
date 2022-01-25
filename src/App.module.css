@@ -14,3 +14,8 @@
   background-color: rgb(255, 255, 255);
   border-bottom: 3px solid black;
 }
+
+.MainContainer {
+  min-height: calc(100vh - 86px) !important;
+  line-height: 3rem !important;
+}

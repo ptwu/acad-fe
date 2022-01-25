@@ -45,7 +45,7 @@ export default function CopyableUrlField({
       </Snackbar>
       <StyledTextField
         id="personalized-url"
-        label="Click me to copy to clipboard"
+        label="Click to copy to clipboard"
         defaultValue={url}
         InputProps={{
           readOnly: true,
