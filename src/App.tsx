@@ -1,10 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styles from './App.module.css';
 import Footer from './components/Footer';
 import Home from './components/Home/';
 import LearningPage from './components/LearningPage';
+import NotFound from './components/NotFound';
 
 export default function App() {
   const theme = createTheme({
@@ -40,8 +41,4 @@ export default function App() {
       <Footer />
     </ThemeProvider>
   );
-}
-
-function NotFound() {
-  return <h2>404</h2>;
 }
