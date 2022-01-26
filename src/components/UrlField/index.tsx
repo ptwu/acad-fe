@@ -1,9 +1,12 @@
-import { Alert, NoSsr, Snackbar, styled, TextField } from '@mui/material';
+import {
+  Alert, NoSsr, Snackbar, styled, TextField,
+} from '@mui/material';
 import { ReactElement, useState } from 'react';
 import './index.module.css';
 
 type Props = {
   readonly url: string;
+  // eslint-disable-next-line react/require-default-props
   readonly className?: string;
 };
 
