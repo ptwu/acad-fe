@@ -5,6 +5,7 @@ export type UserDataWithId = {
   readonly totalLearned: number; // total number of chengyu learned
   readonly reviewPoints: number;
   readonly lastLearned: number; // unix timestamp of last the user was seen
+  readonly usesTraditional: boolean;
 };
 
 export type UserData = Omit<UserDataWithId, 'userId'>;

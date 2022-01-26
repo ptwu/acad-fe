@@ -1,21 +1,17 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  Alert,
   Box,
-  Container,
   LinearProgress,
-  NoSsr,
-  Snackbar,
   styled,
-  TextField,
   Typography,
   Switch,
   FormControlLabel,
+  Container,
+  Grid,
 } from '@mui/material';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { deflate } from 'zlib';
 import { UserData } from '../../data/types';
 import styles from './index.module.css';
 import chengyuData from '../../data/chengyu.json';
@@ -24,14 +20,28 @@ import JiantiIcon from '../../assets/jianti.png';
 
 export default function LearningPage(): ReactElement {
   const { id } = useParams();
-  // const [data, setData] = useState<Omit<UserData, 'userId'> | null>(null);
-  const [data, setData] = useState<UserData | null>({
-    streak: 5,
-    highestStreak: 10,
-    totalLearned: 20,
-    reviewPoints: 6,
-    lastLearned: 1643076860132,
-  });
+  const [data, setData] = useState<UserData | null>(null);
+
+  const changeCharacterBasis = () => {
+    if (data === null) {
+      throw new Error('data for user is not defined!');
+      return;
+    }
+    // async call here
+    setData({ ...data, usesTraditional: !data.usesTraditional });
+  };
+
+  useEffect(() => {
+    // async call here
+    setData({
+      streak: 5,
+      highestStreak: 10,
+      totalLearned: 20,
+      reviewPoints: 6,
+      lastLearned: 1643076860132,
+      usesTraditional: false,
+    });
+  }, []);
 
   const date = new Date();
   const dateString = [
@@ -85,14 +95,49 @@ export default function LearningPage(): ReactElement {
   }));
 
   return (
-    <Box textAlign="center" className={styles.OuterBox}>
+    <Box className={styles.OuterBox}>
       {data !== null ? (
         <>
-          <MaterialUISwitch sx={{ m: 1 }} defaultChecked />
-          <Typography variant="h4">{dateString}</Typography>
-          <Typography variant="h2">
-            {chengyuData[data.totalLearned].simplified}
-          </Typography>
+          <Box textAlign="center">
+            <MaterialUISwitch
+              checked={data.usesTraditional}
+              sx={{ m: 1 }}
+              onChange={changeCharacterBasis}
+            />
+          </Box>
+          <Container maxWidth="lg">
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Typography variant="h4">{dateString}</Typography>
+                <Typography variant="subtitle2">
+                  your chengyu for today:
+                </Typography>
+                <Typography variant="h2">
+                  {data.usesTraditional
+                    ? chengyuData[data.totalLearned].traditional
+                    : chengyuData[data.totalLearned].simplified}
+                </Typography>
+                <Typography variant="h6">
+                  {chengyuData[data.totalLearned].explanation}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="subtitle1">
+                  your chengyu for today:
+                </Typography>
+                <Typography variant="h4">{dateString}</Typography>
+
+                <Typography variant="h2">
+                  {data.usesTraditional
+                    ? chengyuData[data.totalLearned].traditional
+                    : chengyuData[data.totalLearned].simplified}
+                </Typography>
+                <Typography variant="h6">
+                  {chengyuData[data.totalLearned].explanation}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Container>
         </>
       ) : (
         <LinearProgress />
