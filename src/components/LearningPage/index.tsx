@@ -138,6 +138,9 @@ export default function LearningPage(): ReactElement {
                   🏆 Your highest streak of all-time was {data.highestStreak}{' '}
                   days.
                 </Typography>
+                <Typography variant="h5">
+                  🔁 You&apos;ve reviewed {data.reviewPoints} idioms.
+                </Typography>
               </Grid>
             </Grid>
           </Container>
