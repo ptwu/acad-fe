@@ -16,15 +16,13 @@ export default function Home(): ReactElement {
   const handleLinkGeneration = async () => {
     setIsLinkOpen(true);
     // await calls here
-    setLink('https://www.youtube.com/watch?v=J_CFBjAyPWE');
+    setLink('https://achengyuaday.com/u/asdf');
   };
 
   return (
     <Container className={styles.Section}>
       <Typography variant="h3" className={styles.CTAText}>
-        Learn more
-        {' '}
-        <strong>idiom</strong>
+        Learn more <strong>idiom</strong>
         atic Chinese, on the daily.
       </Typography>
       {!isLinkOpen && (
@@ -48,11 +46,9 @@ export default function Home(): ReactElement {
           <Container maxWidth="sm">
             <UrlField url={link} className={styles.Url} />
             <Typography variant="h6" className={styles.Subtitle}>
-              <strong>Bookmark this URL!</strong>
-              {' '}
-              It contains the progress for
-              your chengyu learning journey. (We recommend setting it as one
-              of your starting tabs when you open your browser, so you won&apos;t
+              <strong>Bookmark this URL!</strong> It contains the progress for
+              your chengyu learning journey. (We recommend setting it as one of
+              your starting tabs when you open your browser, so you won&apos;t
               forget to learn every day 🙂)
             </Typography>
           </Container>

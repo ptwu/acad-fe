@@ -2,6 +2,10 @@
   margin-top: 24px;
 }
 
+.ReviewSubtitle {
+  margin-top: 16px !important;
+}
+
 .StatsSubtitle {
   margin-bottom: 16px !important;
 }

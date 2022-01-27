@@ -12,7 +12,7 @@ export default function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#0052cc',
+        main: '#ff47c5',
       },
     },
     typography: {
@@ -25,9 +25,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className={styles.MainContainer}>
         <Typography variant="h4" className={styles.Logo}>
-          a
-          <strong className={styles.CyHeader}>成语</strong>
-          a day
+          a<strong className={styles.CyHeader}>成语</strong>a day
         </Typography>
         <BrowserRouter>
           <Routes>

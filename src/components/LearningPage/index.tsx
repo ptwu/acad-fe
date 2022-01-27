@@ -19,6 +19,7 @@ import styles from './index.module.css';
 import chengyuData from '../../data/chengyu.json';
 import FantiIcon from '../../assets/fanti.png';
 import JiantiIcon from '../../assets/jianti.png';
+import Flashcard from '../Flashcard';
 
 export default function LearningPage(): ReactElement {
   const { id } = useParams();
@@ -141,6 +142,22 @@ export default function LearningPage(): ReactElement {
                 <Typography variant="h5">
                   🔁 You&apos;ve reviewed {data.reviewPoints} idioms.
                 </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  className={styles.ReviewSubtitle}
+                >
+                  DAILY REVIEW
+                </Typography>
+                <Flashcard
+                  front={
+                    data.usesTraditional
+                      ? chengyuData[data.reviewPoints].traditional
+                      : chengyuData[data.reviewPoints].simplified
+                  }
+                  pinyin={chengyuData[data.reviewPoints].pinyin}
+                  definition={chengyuData[data.reviewPoints].explanation}
+                />
               </Grid>
             </Grid>
           </Container>

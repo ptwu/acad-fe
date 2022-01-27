@@ -1,0 +1,16 @@
+.Fab {
+  margin-right: 16px !important;
+}
+
+.FlashcardContainer {
+  margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+.OuterCard {
+  cursor: pointer;
+}
+
+.Wrapper {
+  margin-bottom: 24px;
+}
