@@ -11,6 +11,7 @@ import {
   Container,
   Grid,
   Card,
+  Tooltip,
 } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -103,11 +104,19 @@ export default function LearningPage(): ReactElement {
       {data !== null ? (
         <>
           <Box textAlign="center">
-            <MaterialUISwitch
-              checked={data.usesTraditional}
-              sx={{ m: 1 }}
-              onChange={changeCharacterBasis}
-            />
+            <Tooltip
+              title={
+                data.usesTraditional
+                  ? 'Switch to Simplified Chinese (简体字)'
+                  : 'Switch to Traditional Chinese (繁体字)'
+              }
+            >
+              <MaterialUISwitch
+                checked={data.usesTraditional}
+                sx={{ m: 1 }}
+                onChange={changeCharacterBasis}
+              />
+            </Tooltip>
           </Box>
           <Container maxWidth="lg">
             <Grid container spacing={2}>
