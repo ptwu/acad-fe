@@ -13,6 +13,11 @@ simplified and traditional characters.
 Made with React and TypeScript. continuously deployed on Netlify, and linted
 on push through GitHub Actions.
 
+## Disclaimers
+
+Data for the idioms is sourced from https://github.com/krmanik/chinese-chengyu,
+which uses [CC-CEDICT](https://cc-cedict.org/wiki/)'s definitions.
+
 ## Legal
 
 I make no money off the site itself. This repository is licensed under [Apache
