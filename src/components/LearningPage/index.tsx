@@ -1,3 +1,6 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -7,11 +10,11 @@ import {
   styled,
   Typography,
   Switch,
-  FormControlLabel,
   Container,
   Grid,
-  Card,
   Tooltip,
+  Button,
+  Modal,
 } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -24,12 +27,12 @@ import Flashcard from '../Flashcard';
 
 export default function LearningPage(): ReactElement {
   const { id } = useParams();
+  const [idiomsModalOpen, setIdiomsModalOpen] = useState<boolean>(false);
   const [data, setData] = useState<UserData | null>(null);
 
   const changeCharacterBasis = () => {
     if (data === null) {
       throw new Error('data for user is not defined!');
-      return;
     }
     // async call here
     setData({ ...data, usesTraditional: !data.usesTraditional });
@@ -40,7 +43,7 @@ export default function LearningPage(): ReactElement {
     setData({
       streak: 5,
       highestStreak: 10,
-      totalLearned: 20,
+      totalLearned: 200,
       reviewPoints: 6,
       lastLearned: 1643076860132,
       usesTraditional: false,
@@ -54,6 +57,20 @@ export default function LearningPage(): ReactElement {
     `0 ${date.getMonth() + 1}`.slice(-2).trim(),
     `0 ${date.getDate()}`.slice(-2),
   ].join(' · ');
+
+  const modalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    height: 600,
+    overflowY: 'scroll',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -103,6 +120,27 @@ export default function LearningPage(): ReactElement {
     <Box className={styles.OuterBox}>
       {data !== null ? (
         <>
+          <Modal
+            open={idiomsModalOpen}
+            onClose={() => setIdiomsModalOpen(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={modalStyle}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Past idioms up to today ({data.totalLearned} total)
+              </Typography>
+              {chengyuData
+                .slice(0, data.totalLearned + 1)
+                .map(({ simplified, traditional }) =>
+                  data.usesTraditional ? (
+                    <Typography>{traditional}</Typography>
+                  ) : (
+                    <Typography>{simplified}</Typography>
+                  )
+                )}
+            </Box>
+          </Modal>
           <Box textAlign="center">
             <Tooltip
               title={
@@ -156,7 +194,7 @@ export default function LearningPage(): ReactElement {
                   variant="subtitle1"
                   className={styles.ReviewSubtitle}
                 >
-                  DAILY REVIEW
+                  DAILY REVIEW (click the flashcard to reveal)
                 </Typography>
                 <Flashcard
                   front={
@@ -167,6 +205,13 @@ export default function LearningPage(): ReactElement {
                   pinyin={chengyuData[data.reviewPoints].pinyin}
                   definition={chengyuData[data.reviewPoints].explanation}
                 />
+                <Button
+                  onClick={() => setIdiomsModalOpen(true)}
+                  variant="outlined"
+                  className={styles.BottomButton}
+                >
+                  View Idiom History
+                </Button>
               </Grid>
             </Grid>
           </Container>

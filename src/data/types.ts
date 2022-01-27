@@ -1,3 +1,5 @@
+export const MAX_CHENGYU_NUMBER = 258;
+
 export type UserDataWithId = {
   readonly userId: string; // not tied to the user's actual identity, purely a string
   readonly streak: number; // current daily streak
