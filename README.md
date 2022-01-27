@@ -20,7 +20,7 @@ which uses [CC-CEDICT](https://cc-cedict.org/wiki/)'s definitions.
 
 ## Legal
 
-I make no money off the site itself. This repository is licensed under [Apache
+This site is not monetized in any way. This repository is licensed under [Apache
 License 2.0](https://github.com/ptwu/acad-fe/blob/main/LICENSE).
 
 ---
