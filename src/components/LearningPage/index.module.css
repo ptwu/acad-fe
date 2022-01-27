@@ -1,3 +1,7 @@
 .OuterBox {
   margin-top: 24px;
 }
+
+.StatsSubtitle {
+  margin-bottom: 16px !important;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
@@ -9,6 +10,7 @@ import {
   FormControlLabel,
   Container,
   Grid,
+  Card,
 } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -32,7 +34,7 @@ export default function LearningPage(): ReactElement {
   };
 
   useEffect(() => {
-    // async call here
+    // async call here (get data)
     setData({
       streak: 5,
       highestStreak: 10,
@@ -41,6 +43,7 @@ export default function LearningPage(): ReactElement {
       lastLearned: 1643076860132,
       usesTraditional: false,
     });
+    // async call here (post today reviewed)
   }, []);
 
   const date = new Date();
@@ -108,32 +111,32 @@ export default function LearningPage(): ReactElement {
           <Container maxWidth="lg">
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
-                <Typography variant="h4">{dateString}</Typography>
-                <Typography variant="subtitle2">
-                  your chengyu for today:
-                </Typography>
+                <Typography variant="h3">{dateString}</Typography>
                 <Typography variant="h2">
                   {data.usesTraditional
                     ? chengyuData[data.totalLearned].traditional
                     : chengyuData[data.totalLearned].simplified}
+                </Typography>
+                <Typography variant="h4" style={{ fontWeight: '300' }}>
+                  {chengyuData[data.totalLearned].pinyin}
                 </Typography>
                 <Typography variant="h6">
                   {chengyuData[data.totalLearned].explanation}
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <Typography variant="subtitle1">
-                  your chengyu for today:
+                <Typography
+                  variant="subtitle1"
+                  className={styles.StatsSubtitle}
+                >
+                  YOUR STATS
                 </Typography>
-                <Typography variant="h4">{dateString}</Typography>
-
-                <Typography variant="h2">
-                  {data.usesTraditional
-                    ? chengyuData[data.totalLearned].traditional
-                    : chengyuData[data.totalLearned].simplified}
+                <Typography variant="h5">
+                  🔥 You&apos;ve been at it for {data.streak} days!
                 </Typography>
-                <Typography variant="h6">
-                  {chengyuData[data.totalLearned].explanation}
+                <Typography variant="h5">
+                  🏆 Your highest streak of all-time was {data.highestStreak}{' '}
+                  days.
                 </Typography>
               </Grid>
             </Grid>
