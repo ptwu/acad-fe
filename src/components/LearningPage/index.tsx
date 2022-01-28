@@ -146,7 +146,7 @@ export default function LearningPage(): ReactElement {
               title={
                 data.usesTraditional
                   ? 'Switch to Simplified Chinese (简体字)'
-                  : 'Switch to Traditional Chinese (繁体字)'
+                  : 'Switch to Traditional Chinese (繁體字)'
               }
             >
               <MaterialUISwitch
