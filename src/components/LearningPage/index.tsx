@@ -194,7 +194,8 @@ export default function LearningPage(): ReactElement {
                   variant="subtitle1"
                   className={styles.ReviewSubtitle}
                 >
-                  DAILY REVIEW (click the flashcard to reveal)
+                  DAILY REVIEW{' '}
+                  {data.reviewPoints === 0 && 'click the flashcard to reveal'}
                 </Typography>
                 <Flashcard
                   front={

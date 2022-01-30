@@ -6,6 +6,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { ReactElement, useState } from 'react';
+import { API_URL, NewUserResponse } from '../../data/types';
 import UrlField from '../UrlField';
 import styles from './index.module.css';
 
@@ -16,7 +17,13 @@ export default function Home(): ReactElement {
   const handleLinkGeneration = async () => {
     setIsLinkOpen(true);
     // await calls here
-    setLink('https://achengyuaday.com/u/asdf');
+    const newUserResponse = await fetch(`${API_URL}/api/create-user`, {
+      method: 'POST',
+    });
+    if (newUserResponse.ok) {
+      const newUser = (await newUserResponse.json()) as NewUserResponse;
+      setLink(`https://achengyuaday.com/u/${newUser.id}`);
+    }
   };
 
   return (
