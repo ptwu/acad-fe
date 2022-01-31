@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable function-paren-newline */
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable implicit-arrow-linebreak */
@@ -18,7 +20,7 @@ import {
 } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { UserData } from '../../data/types';
+import { API_URL, UserData } from '../../data/types';
 import styles from './index.module.css';
 import chengyuData from '../../data/chengyu.json';
 import FantiIcon from '../../assets/fanti.png';
@@ -40,14 +42,12 @@ export default function LearningPage(): ReactElement {
 
   useEffect(() => {
     // async call here (get data)
-    setData({
-      streak: 5,
-      highestStreak: 10,
-      totalLearned: 200,
-      reviewPoints: 6,
-      lastLearned: 1643076860132,
-      usesTraditional: false,
-    });
+    const diff = -(new Date().getTimezoneOffset() / 60);
+    const newUserResponse = fetch(`${API_URL}/api/user/${id}?offset=${diff}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((d) => setData(d));
     // async call here (post today reviewed)
   }, []);
 
@@ -117,9 +117,9 @@ export default function LearningPage(): ReactElement {
   }));
 
   return (
-    <Box className={styles.OuterBox}>
+    <>
       {data !== null ? (
-        <>
+        <Box className={styles.OuterBox}>
           <Modal
             open={idiomsModalOpen}
             onClose={() => setIdiomsModalOpen(false)}
@@ -134,9 +134,11 @@ export default function LearningPage(): ReactElement {
                 .slice(0, data.totalLearned + 1)
                 .map(({ simplified, traditional }) =>
                   data.usesTraditional ? (
-                    <Typography>{traditional}</Typography>
+                    <Typography key={`${traditional}`}>
+                      {traditional}
+                    </Typography>
                   ) : (
-                    <Typography>{simplified}</Typography>
+                    <Typography key={`${simplified}`}>{simplified}</Typography>
                   )
                 )}
             </Box>
@@ -179,47 +181,71 @@ export default function LearningPage(): ReactElement {
                 >
                   YOUR STATS
                 </Typography>
+                {data.totalLearned <= 1 && (
+                  <Typography>
+                    No stats to show right now! Come back tomorrow and on to see
+                    your stats across your chengyu learning journey.
+                  </Typography>
+                )}
+                {data.highestStreak > 0 && (
+                  <>
+                    <Typography variant="h5">
+                      🔥 You&apos;ve been at it for {data.streak}{' '}
+                      {data.streak === 1 ? 'day' : 'days'}!
+                    </Typography>
+                    <Typography variant="h5">
+                      🏆 Your highest streak of all-time was{' '}
+                      {data.highestStreak}{' '}
+                      {data.highestStreak === 1 ? 'day' : 'days'}.
+                    </Typography>
+                  </>
+                )}
+
                 <Typography variant="h5">
-                  🔥 You&apos;ve been at it for {data.streak} days!
+                  {data.reviewPoints === 0 &&
+                    data.totalLearned > 0 &&
+                    "🔁 You haven't reviewed any idioms! Click the flashcard below to try it out."}
                 </Typography>
                 <Typography variant="h5">
-                  🏆 Your highest streak of all-time was {data.highestStreak}{' '}
-                  days.
-                </Typography>
-                <Typography variant="h5">
-                  🔁 You&apos;ve reviewed {data.reviewPoints} idioms.
+                  {data.reviewPoints === 1 &&
+                    `🔁 You&apos;ve reviewed ${data.reviewPoints} idiom. Keep trucking on!`}
                 </Typography>
 
                 <Typography
                   variant="subtitle1"
                   className={styles.ReviewSubtitle}
                 >
-                  DAILY REVIEW{' '}
-                  {data.reviewPoints === 0 && 'click the flashcard to reveal'}
+                  DAILY REVIEW
                 </Typography>
-                <Flashcard
-                  front={
-                    data.usesTraditional
-                      ? chengyuData[data.reviewPoints].traditional
-                      : chengyuData[data.reviewPoints].simplified
-                  }
-                  pinyin={chengyuData[data.reviewPoints].pinyin}
-                  definition={chengyuData[data.reviewPoints].explanation}
-                />
-                <Button
-                  onClick={() => setIdiomsModalOpen(true)}
-                  variant="outlined"
-                  className={styles.BottomButton}
-                >
-                  View Idiom History
-                </Button>
+                {data.totalLearned === 0 ? (
+                  <Typography>No cards to review yet!</Typography>
+                ) : (
+                  <>
+                    <Flashcard
+                      front={
+                        data.usesTraditional
+                          ? chengyuData[data.reviewPoints].traditional
+                          : chengyuData[data.reviewPoints].simplified
+                      }
+                      pinyin={chengyuData[data.reviewPoints].pinyin}
+                      definition={chengyuData[data.reviewPoints].explanation}
+                    />
+                    <Button
+                      onClick={() => setIdiomsModalOpen(true)}
+                      variant="outlined"
+                      className={styles.BottomButton}
+                    >
+                      View Idiom History
+                    </Button>
+                  </>
+                )}
               </Grid>
             </Grid>
           </Container>
-        </>
+        </Box>
       ) : (
         <LinearProgress />
       )}
-    </Box>
+    </>
   );
 }

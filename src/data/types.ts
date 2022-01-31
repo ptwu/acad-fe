@@ -8,7 +8,7 @@ export type NewUserResponse = {
 };
 
 export type UserDataWithId = {
-  readonly userId: string; // not tied to the user's actual identity, purely a string
+  readonly id: string; // not tied to the user's actual identity, purely a string
   readonly streak: number; // current daily streak
   readonly highestStreak: number; // number of highest streak ever
   readonly totalLearned: number; // total number of chengyu learned
@@ -17,7 +17,7 @@ export type UserDataWithId = {
   readonly usesTraditional: boolean;
 };
 
-export type UserData = Omit<UserDataWithId, 'userId'>;
+export type UserData = Omit<UserDataWithId, 'id'>;
 
 export type DailyQuizPayload = {
   readonly userId: string; // not tied to the user's actual identity, purely a string
