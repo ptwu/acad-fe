@@ -10,8 +10,9 @@ Daily Chinese Chengyu idiom learning tool. Provides users with a custom link
 intended as a homepage to learn and review idioms every day! Supports both
 simplified and traditional characters.
 
-Made with React and TypeScript. continuously deployed on Netlify, and linted
-on push through GitHub Actions.
+This is the repo for the frontend. Made with React and TypeScript. continuously
+deployed on Netlify, and linted on push through GitHub Actions.
+[Click here](https://github.com/ptwu/acad-be) to see the backend code.
 
 ## Disclaimers
 
