@@ -5,10 +5,16 @@
 .FlashcardContainer {
   margin-bottom: 3em;
   margin-top: 3em;
+  padding: 0 24px 0 24px;
 }
 
 .OuterCard {
   cursor: pointer;
+}
+
+.PinyinText {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif !important;
 }
 
 .Wrapper {

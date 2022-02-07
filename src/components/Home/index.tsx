@@ -4,6 +4,8 @@ import {
   Button,
   Box,
   CircularProgress,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { API_URL, NewUserResponse } from '../../data/types';
@@ -13,6 +15,7 @@ import styles from './index.module.css';
 export default function Home(): ReactElement {
   const [isLinkOpen, setIsLinkOpen] = useState<boolean>(false);
   const [link, setLink] = useState<string>('');
+  const [isErrorAlertOn, setErrorAlertOn] = useState<boolean>(false);
 
   const handleLinkGeneration = async () => {
     setIsLinkOpen(true);
@@ -23,11 +26,26 @@ export default function Home(): ReactElement {
     if (newUserResponse.ok) {
       const newUser = (await newUserResponse.json()) as NewUserResponse;
       setLink(`https://achengyuaday.com/u/${newUser.id}`);
+    } else {
+      setErrorAlertOn(true);
     }
   };
 
   return (
     <Container className={styles.Section}>
+      <Snackbar
+        open={isErrorAlertOn}
+        autoHideDuration={6000}
+        onClose={() => setErrorAlertOn(false)}
+      >
+        <Alert
+          onClose={() => setErrorAlertOn(false)}
+          severity="error"
+          sx={{ width: '100%' }}
+        >
+          There was an error when generating your link. Please try again!
+        </Alert>
+      </Snackbar>
       <Typography variant="h3" className={styles.CTAText}>
         Learn more <strong>idiom</strong>
         atic Chinese, on the daily.
