@@ -24,7 +24,7 @@ import {
 } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { API_URL, UserData } from '../../data/types';
+import { API_URL, MAX_CHENGYU_NUMBER, UserData } from '../../data/types';
 import styles from './index.module.css';
 import chengyuData from '../../data/chengyu.json';
 import FantiIcon from '../../assets/fanti.png';
@@ -195,24 +195,40 @@ export default function LearningPage(): ReactElement {
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <Typography variant="h3">{dateString}</Typography>
-                <Typography variant="h2">
-                  {data.usesTraditional
-                    ? chengyuData[data.totalLearned].traditional
-                    : chengyuData[data.totalLearned].simplified}
-                </Typography>
-                <Typography variant="h4" className={styles.PinyinText}>
-                  {chengyuData[data.totalLearned].pinyin}
-                </Typography>
-                <Typography variant="h6">
-                  {chengyuData[data.totalLearned].explanation}
-                </Typography>
+                {data.totalLearned === MAX_CHENGYU_NUMBER ? (
+                  <>
+                    <Typography variant="h5">
+                      <b>🥳 Congratulations! 🎉</b> You&apos;ve completed all of
+                      the 成语 in our dataset! Please contact Peter about this.
+                      (<i>he will be very happy</i>)
+                    </Typography>
+                    <Typography variant="h5" className={styles.ReviewSubtitle}>
+                      While you&apos;re here, go ahead and finish those reviews!
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    <Typography variant="h2">
+                      {data.usesTraditional
+                        ? chengyuData[data.totalLearned].traditional
+                        : chengyuData[data.totalLearned].simplified}
+                    </Typography>
+                    <Typography variant="h4" className={styles.PinyinText}>
+                      {chengyuData[data.totalLearned].pinyin}
+                    </Typography>
+                    <Typography variant="h6">
+                      {chengyuData[data.totalLearned].explanation}
+                    </Typography>
+                  </>
+                )}
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography
                   variant="subtitle1"
                   className={styles.StatsSubtitle}
                 >
-                  YOUR STATS
+                  YOUR STATS{' '}
+                  {data.totalLearned === MAX_CHENGYU_NUMBER && '(final)'}
                 </Typography>
                 {data.highestStreak < 1 && (
                   <Typography>
@@ -233,10 +249,8 @@ export default function LearningPage(): ReactElement {
                         data.streak < 50 &&
                         '. Great stuff!'}
                       {data.streak >= 50 && data.streak < 100 && '. 好牛'}
-                      {data.streak === 100 && '. Here&apos;s to 💯!'}!
-                      {data.streak >= 100 &&
-                        '. You&apos;re setting new standards'}
-                      !
+                      {data.streak === 100 && ". Here's to 💯!"}!
+                      {data.streak >= 100 && ". You're setting new standards"}!
                     </Typography>
                     <Typography variant="h5">
                       {data.highestStreak === data.streak
