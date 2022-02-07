@@ -1,6 +1,7 @@
+/* eslint-disable operator-linebreak */
 export const MAX_CHENGYU_NUMBER = 258;
 
-export const API_URL = 'http://127.0.0.1:8080';
+export const API_URL = 'https://agile-gorge-49230.herokuapp.com';
 
 export type NewUserResponse = {
   readonly id: string;
